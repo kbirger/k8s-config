@@ -1,7 +1,7 @@
 {
   "name": "k8s-config-cli",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "A CLI for performing operations on k8s config files",
   "main": "./dist/cli.js",
   "bin": {
     "k8s-config": "./dist/cli.js"
@@ -29,11 +29,11 @@
     "eslint": "^7.5.0",
     "jest": "^26.1.0",
     "jest-stare": "^2.0.1",
-    "moment": "^2.26.0",
     "ts-node": "^8.4.1",
     "typescript": "^3.9.7"
   },
   "dependencies": {
+    "moment": "^2.26.0",
     "@types/jsonpath": "^0.2.0",
     "@types/lodash": "^4.14.155",
     "@types/node": "^12.11.1",
