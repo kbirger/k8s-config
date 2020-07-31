@@ -1,0 +1,4 @@
+*.ts
+.vscode/
+*.json
+test/
