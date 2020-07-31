@@ -10,4 +10,4 @@ babel.config.js
 .travis.yml
 
 
-k8s-config-*.tgz
+k8s-config-cli-*.tgz

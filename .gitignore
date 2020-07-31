@@ -43,4 +43,4 @@ node_modules/
 coverage/
 
 dist/
-k8s-config-*.tgz
+k8s-config-cli-*.tgz
