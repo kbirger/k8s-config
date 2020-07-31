@@ -40,8 +40,7 @@ build/Release
 
 # Dependency directories
 node_modules/
-*.js
 coverage/
 
-
+dist/
 k8s-config-*.tgz
