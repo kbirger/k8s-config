@@ -2,11 +2,12 @@
   "name": "k8s-config",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/cli.js",
   "bin": {
     "k8s-config": "./dist/cli.js"
   },
   "scripts": {
+    "setup": "npm install",
     "build": "tsc",
     "test": "jest",
     "lint": "eslint **/*.ts"

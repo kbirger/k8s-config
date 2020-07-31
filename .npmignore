@@ -8,3 +8,6 @@ jest.config.js
 babel.config.js
 .eslintrc.js
 .travis.yml
+
+
+k8s-config-*.tgz

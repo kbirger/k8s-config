@@ -42,3 +42,6 @@ build/Release
 node_modules/
 *.js
 coverage/
+
+
+k8s-config-*.tgz

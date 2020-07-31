@@ -1,6 +1,18 @@
 language: node_js
 node_js:
 - '12.13'
+
+before_script:
+  - npm run setup
+  - npm run build
+
+
+script:
+  - npm run test
+
+after_success: 
+  - npm pack
+
 deploy:
   provider: npm
   email: kbirger@gmail.com
@@ -9,4 +21,4 @@ deploy:
   
   on:
     branch: master
-  # skip_cleanup: true
+  skip_cleanup: true
