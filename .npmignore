@@ -2,3 +2,9 @@
 .vscode/
 *.json
 test/
+coverage/
+jest-stare/
+jest.config.js
+babel.config.js
+.eslintrc.js
+.travis.yml
