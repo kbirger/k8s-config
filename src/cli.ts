@@ -10,7 +10,7 @@ yargs
   .option('dry-run', { alias: 'd', describe: 'do not write anything', type: 'boolean', default: false })
   .command(
     ['$0', 'interactive <command>', 'i <command>'],
-    'launches in interactive mode with prompts', // todo: validate?
+    'launches in interactive mode with prompts',
     (args) => args.positional('command', { describe: 'name of the command', choices: ['delete', 'list', 'merge', 'rename'] }),
     (args) => compose(
       () => header(args['dry-run']),
