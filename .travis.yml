@@ -16,6 +16,7 @@ deploy:
   file: k8s-config-cli-*.tgz
   on:
     branch: master
+    tags: true
   skip_cleanup: 'true'  
 - provider: npm
   email: kbirger@gmail.com
@@ -24,4 +25,5 @@ deploy:
 
   on:
     branch: master
+    tags: true
   skip_cleanup: true
