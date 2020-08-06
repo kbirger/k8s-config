@@ -86,7 +86,7 @@ describe('delete command', () => {
       // Assert
       expect(result).toEqual(true);
       expect(fileUtils.saveConfig)
-        .toHaveBeenCalledWith('./test/test.yaml', expect.objectContaining({ contexts: [] }))
+        .toHaveBeenCalledWith('./test/test.yaml', expect.objectContaining({ contexts: [] }));
     });
   });
 
@@ -104,7 +104,7 @@ describe('delete command', () => {
       await deleteItem('./test/test.yaml', 'cluster', 'FOO');
 
       // Assert
-      expect(console.error).toHaveBeenCalledWith(" Configuration does not contain a cluster with name 'FOO'");
+      expect(console.error).toHaveBeenCalledWith(' Configuration does not contain a cluster with name \'FOO\'');
     });
 
     it('return true when cluster is found', async () => {
@@ -122,7 +122,7 @@ describe('delete command', () => {
 
       // Assert
       expect(fileUtils.saveConfig)
-        .toHaveBeenCalledWith('./test/test.yaml', expect.objectContaining({ clusters: [] }))
+        .toHaveBeenCalledWith('./test/test.yaml', expect.objectContaining({ clusters: [] }));
     });
   });
 
@@ -158,7 +158,7 @@ describe('delete command', () => {
 
       // Assert
       expect(fileUtils.saveConfig)
-        .toHaveBeenCalledWith('./test/test.yaml', expect.objectContaining({ users: [] }))
+        .toHaveBeenCalledWith('./test/test.yaml', expect.objectContaining({ users: [] }));
     });
   });
 });

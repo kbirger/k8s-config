@@ -161,8 +161,8 @@ describe('merge command', () => {
     // Assert
     expect(fileUtils.saveConfig).not.toHaveBeenCalledWith('b', expect.anything());
     expect(console.error).toHaveBeenCalledTimes(2);
-    expect(console.error).toHaveBeenCalledWith("Errors occurred:");
-    expect(console.error).toHaveBeenCalledWith(" cluster with name 'test-cluster' already exists");
+    expect(console.error).toHaveBeenCalledWith('Errors occurred:');
+    expect(console.error).toHaveBeenCalledWith(' cluster with name \'test-cluster\' already exists');
     // todo: make display all errors
     // expect(console.error).toHaveBeenCalledWith(" Target 'users' already contains object with name=test-user.");
   });

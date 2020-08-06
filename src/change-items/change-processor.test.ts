@@ -3,68 +3,68 @@ import { Config } from '../interfaces';
 import { Actions } from './interfaces';
 
 const config = {
-  "apiVersion": "v1",
-  "clusters": [
+  'apiVersion': 'v1',
+  'clusters': [
     {
-      "cluster": {
-        "server": "https://localhost"
+      'cluster': {
+        'server': 'https://localhost'
       },
-      "name": "test-cluster"
+      'name': 'test-cluster'
     }
   ],
-  "contexts": [
+  'contexts': [
     {
-      "context": {
-        "cluster": "test-cluster",
-        "namespace": "default",
-        "user": "test-user"
+      'context': {
+        'cluster': 'test-cluster',
+        'namespace': 'default',
+        'user': 'test-user'
       },
-      "name": "test-ctx"
+      'name': 'test-ctx'
     }
   ],
-  "current-context": "test-ctx",
-  "kind": "Config",
-  "preferences": {},
-  "users": [
+  'current-context': 'test-ctx',
+  'kind': 'Config',
+  'preferences': {},
+  'users': [
     {
-      "name": "test-user",
-      "user": {
-        "client-certificate-data": "test-cert-data",
-        "client-key-data": "test-key-data"
+      'name': 'test-user',
+      'user': {
+        'client-certificate-data': 'test-cert-data',
+        'client-key-data': 'test-key-data'
       }
     }
   ]
 } as Config;
 
 const configMerge = {
-  "apiVersion": "v1",
-  "clusters": [
+  'apiVersion': 'v1',
+  'clusters': [
     {
-      "cluster": {
-        "server": "https://localhost"
+      'cluster': {
+        'server': 'https://localhost'
       },
-      "name": "test-cluster-new"
+      'name': 'test-cluster-new'
     }
   ],
-  "contexts": [
+  'contexts': [
     {
-      "context": {
-        "cluster": "test-cluster-new",
-        "namespace": "default",
-        "user": "test-user-new"
+      'context': {
+        'cluster': 'test-cluster-new',
+        'namespace': 'default',
+        'user': 'test-user-new'
       },
-      "name": "test-ctx-new"
+      'name': 'test-ctx-new'
     }
   ],
-  "current-context": "test-ctx-new",
-  "kind": "Config",
-  "preferences": {},
-  "users": [
+  'current-context': 'test-ctx-new',
+  'kind': 'Config',
+  'preferences': {},
+  'users': [
     {
-      "name": "test-user-new",
-      "user": {
-        "client-certificate-data": "test-cert-data",
-        "client-key-data": "test-key-data"
+      'name': 'test-user-new',
+      'user': {
+        'client-certificate-data': 'test-cert-data',
+        'client-key-data': 'test-key-data'
       }
     }
   ]
@@ -72,55 +72,55 @@ const configMerge = {
 
 
 const configMergeWithConflicts = {
-  "apiVersion": "v1",
-  "clusters": [
+  'apiVersion': 'v1',
+  'clusters': [
     {
-      "cluster": {
-        "server": "https://localhost/new"
+      'cluster': {
+        'server': 'https://localhost/new'
       },
-      "name": "test-cluster"
+      'name': 'test-cluster'
     },
     {
-      "cluster": {
-        "server": "https://localhost"
+      'cluster': {
+        'server': 'https://localhost'
       },
-      "name": "test-cluster2"
+      'name': 'test-cluster2'
     }
   ],
-  "contexts": [
+  'contexts': [
     {
-      "context": {
-        "cluster": "test-cluster",
-        "namespace": "default",
-        "user": "test-user2"
+      'context': {
+        'cluster': 'test-cluster',
+        'namespace': 'default',
+        'user': 'test-user2'
       },
-      "name": "test-ctx"
+      'name': 'test-ctx'
     },
     {
-      "context": {
-        "cluster": "test-cluster2",
-        "namespace": "default",
-        "user": "test-user2"
+      'context': {
+        'cluster': 'test-cluster2',
+        'namespace': 'default',
+        'user': 'test-user2'
       },
-      "name": "test-ctx2"
+      'name': 'test-ctx2'
     }
   ],
-  "current-context": "test-ctx",
-  "kind": "Config",
-  "preferences": {},
-  "users": [
+  'current-context': 'test-ctx',
+  'kind': 'Config',
+  'preferences': {},
+  'users': [
     {
-      "name": "test-user",
-      "user": {
-        "client-certificate-data": "test-cert-data",
-        "client-key-data": "test-key-data"
+      'name': 'test-user',
+      'user': {
+        'client-certificate-data': 'test-cert-data',
+        'client-key-data': 'test-key-data'
       }
     },
     {
-      "name": "test-user2",
-      "user": {
-        "client-certificate-data": "test-cert-data",
-        "client-key-data": "test-key-data"
+      'name': 'test-user2',
+      'user': {
+        'client-certificate-data': 'test-cert-data',
+        'client-key-data': 'test-key-data'
       }
     }
   ]
@@ -143,12 +143,12 @@ async function go() {
         field: 'name'
       },
       newValue: {
-        "context": {
-          "cluster": "test-cluster",
-          "namespace": "default",
-          "user": "test-user2"
+        'context': {
+          'cluster': 'test-cluster',
+          'namespace': 'default',
+          'user': 'test-user2'
         },
-        "name": "test-ctx"
+        'name': 'test-ctx'
       }
     }]);
 

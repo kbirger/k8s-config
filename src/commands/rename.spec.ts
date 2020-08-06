@@ -50,7 +50,7 @@ describe('rename command', () => {
       await rename('a', 'cluster', 'test-cluster', 'test-cluster');
 
       // Assert
-      expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(fileUtils.loadConfig('a')))
+      expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(fileUtils.loadConfig('a')));
     });
 
     it('should succeed when target exists and user confirms', async () => {
@@ -72,34 +72,34 @@ describe('rename command', () => {
       expect(response).toEqual(true);
       expect(fileUtils.saveConfig)
         .toHaveBeenCalledWith('a', expect.objectContaining({
-          "apiVersion": "v1",
-          "clusters": [
+          'apiVersion': 'v1',
+          'clusters': [
             {
-              "cluster": {
-                "server": "https://localhost"
+              'cluster': {
+                'server': 'https://localhost'
               },
-              "name": "foo"
+              'name': 'foo'
             }
           ],
-          "contexts": [
+          'contexts': [
             {
-              "context": {
-                "cluster": "foo",
-                "namespace": "default",
-                "user": "test-user"
+              'context': {
+                'cluster': 'foo',
+                'namespace': 'default',
+                'user': 'test-user'
               },
-              "name": "test-ctx"
+              'name': 'test-ctx'
             }
           ],
-          "current-context": "test-ctx",
-          "kind": "Config",
-          "preferences": {},
-          "users": [
+          'current-context': 'test-ctx',
+          'kind': 'Config',
+          'preferences': {},
+          'users': [
             {
-              "name": "test-user",
-              "user": {
-                "client-certificate-data": "test-cert-data",
-                "client-key-data": "test-key-data"
+              'name': 'test-user',
+              'user': {
+                'client-certificate-data': 'test-cert-data',
+                'client-key-data': 'test-key-data'
               }
             }
           ]
@@ -125,34 +125,34 @@ describe('rename command', () => {
       expect(response).toEqual(false);
       expect(fileUtils.saveConfig)
         .not.toHaveBeenCalledWith('a', expect.objectContaining({
-          "apiVersion": "v1",
-          "clusters": [
+          'apiVersion': 'v1',
+          'clusters': [
             {
-              "cluster": {
-                "server": "https://localhost"
+              'cluster': {
+                'server': 'https://localhost'
               },
-              "name": "foo"
+              'name': 'foo'
             }
           ],
-          "contexts": [
+          'contexts': [
             {
-              "context": {
-                "cluster": "foo",
-                "namespace": "default",
-                "user": "test-user"
+              'context': {
+                'cluster': 'foo',
+                'namespace': 'default',
+                'user': 'test-user'
               },
-              "name": "test-ctx"
+              'name': 'test-ctx'
             }
           ],
-          "current-context": "test-ctx",
-          "kind": "Config",
-          "preferences": {},
-          "users": [
+          'current-context': 'test-ctx',
+          'kind': 'Config',
+          'preferences': {},
+          'users': [
             {
-              "name": "test-user",
-              "user": {
-                "client-certificate-data": "test-cert-data",
-                "client-key-data": "test-key-data"
+              'name': 'test-user',
+              'user': {
+                'client-certificate-data': 'test-cert-data',
+                'client-key-data': 'test-key-data'
               }
             }
           ]
@@ -226,9 +226,9 @@ describe('rename command', () => {
       await rename('a', 'cluster', 'test-cluster', 'test-cluster2');
 
       // Assert
-      expect(console.log).toHaveBeenCalledWith("Deleted undefined with name='test-cluster2'");
-      expect(console.log).toHaveBeenCalledWith("Changed clusters[?].cluster: test-cluster => test-cluster2");
-      expect(console.log).toHaveBeenCalledWith("Changed contexts[?].context: test-cluster => test-cluster2");
+      expect(console.log).toHaveBeenCalledWith('Deleted undefined with name=\'test-cluster2\'');
+      expect(console.log).toHaveBeenCalledWith('Changed clusters[?].cluster: test-cluster => test-cluster2');
+      expect(console.log).toHaveBeenCalledWith('Changed contexts[?].context: test-cluster => test-cluster2');
       expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(expectedConfig));
     });
 
@@ -237,7 +237,7 @@ describe('rename command', () => {
       await rename('a', 'cluster', 'foo', 'bar');
 
       // Assert
-      expect(console.error).toHaveBeenCalledWith(" Operation impossible: No cluster at path '$.clusters[?(@.name==\"foo\")].name' exists.");
+      expect(console.error).toHaveBeenCalledWith(' Operation impossible: No cluster at path \'$.clusters[?(@.name=="foo")].name\' exists.');
     });
   });
 
@@ -249,7 +249,7 @@ describe('rename command', () => {
       await rename('a', 'context', 'test-ctx', 'test-ctx');
 
       // Assert
-      expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(fileUtils.loadConfig('a')))
+      expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(fileUtils.loadConfig('a')));
     });
 
     it('should log nothing when renaming a context to the same name', async () => {
@@ -273,8 +273,8 @@ describe('rename command', () => {
 
       // Assert
       expect(result).toEqual(true);
-      expect(console.log).toHaveBeenCalledWith("Changed contexts[?].context: test-ctx => test-ctx2");
-      expect(console.log).toHaveBeenCalledWith("Changed current-context: test-ctx => test-ctx2");
+      expect(console.log).toHaveBeenCalledWith('Changed contexts[?].context: test-ctx => test-ctx2');
+      expect(console.log).toHaveBeenCalledWith('Changed current-context: test-ctx => test-ctx2');
       expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(expectedConfig));
     });
 
@@ -291,16 +291,16 @@ describe('rename command', () => {
       });
       expectedConfig.contexts[0].name = 'test-ctx2';
       expectedConfig.contexts[0].context.cluster = 'test-cluster';
-      expectedConfig['current-context'] = 'test-ctx2'
+      expectedConfig['current-context'] = 'test-ctx2';
       jest.spyOn(fileUtils, 'loadConfig').mockImplementationOnce(() => originalConfig);
       mockInquirerResponse = { confirm: 'overwrite' };
       // Act
       await rename('a', 'context', 'test-ctx', 'test-ctx2');
 
       // Assert
-      expect(console.log).toHaveBeenCalledWith("Deleted undefined with name='test-ctx2'");
-      expect(console.log).toHaveBeenCalledWith("Changed contexts[?].context: test-ctx => test-ctx2");
-      expect(console.log).toHaveBeenCalledWith("Changed current-context: test-ctx => test-ctx2");
+      expect(console.log).toHaveBeenCalledWith('Deleted undefined with name=\'test-ctx2\'');
+      expect(console.log).toHaveBeenCalledWith('Changed contexts[?].context: test-ctx => test-ctx2');
+      expect(console.log).toHaveBeenCalledWith('Changed current-context: test-ctx => test-ctx2');
 
       expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(expectedConfig));
     });
@@ -310,7 +310,7 @@ describe('rename command', () => {
       await rename('a', 'context', 'foo', 'bar');
 
       // Assert
-      expect(console.error).toHaveBeenCalledWith(" Operation impossible: No context at path '$.contexts[?(@.name==\"foo\")].name' exists.");
+      expect(console.error).toHaveBeenCalledWith(' Operation impossible: No context at path \'$.contexts[?(@.name=="foo")].name\' exists.');
     });
   });
 
@@ -322,7 +322,7 @@ describe('rename command', () => {
       await rename('a', 'user', 'test-user', 'test-user');
 
       // Assert
-      expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(fileUtils.loadConfig('a')))
+      expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(fileUtils.loadConfig('a')));
     });
 
     it('should log nothing when renaming a user to the same name', async () => {
@@ -339,14 +339,14 @@ describe('rename command', () => {
       // Arrange
       const expectedConfig = fileUtils.loadConfig('a');
       expectedConfig.users[0].name = 'test-user2';
-      expectedConfig.contexts[0].context.user = 'test-user2'
+      expectedConfig.contexts[0].context.user = 'test-user2';
 
       // Act
       const result = await rename('a', 'user', 'test-user', 'test-user2');
 
       // Assert
       expect(result).toEqual(true);
-      expect(console.log).toHaveBeenCalledWith("Changed users[?].user: test-user => test-user2");
+      expect(console.log).toHaveBeenCalledWith('Changed users[?].user: test-user => test-user2');
       expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(expectedConfig));
     });
 
@@ -358,8 +358,8 @@ describe('rename command', () => {
       originalConfig.users.push({
         name: 'test-user2',
         user: {
-          "client-certificate-data": 'test-cert-data',
-          "client-key-data": 'test-key-data'
+          'client-certificate-data': 'test-cert-data',
+          'client-key-data': 'test-key-data'
         }
       });
       expectedConfig.users[0].name = 'test-user2';
@@ -381,7 +381,7 @@ describe('rename command', () => {
       await rename('a', 'user', 'foo', 'bar');
 
       // Assert
-      expect(console.error).toHaveBeenCalledWith(" Operation impossible: No user at path '$.users[?(@.name==\"foo\")].name' exists.");
+      expect(console.error).toHaveBeenCalledWith(' Operation impossible: No user at path \'$.users[?(@.name=="foo")].name\' exists.');
     });
   });
 });

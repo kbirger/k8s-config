@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-export type Command = () => boolean | Promise<boolean>
+export type Command = () => boolean | Promise<boolean>;
 
 export interface Config {
   apiVersion: string;
@@ -47,4 +47,4 @@ export type ItemType = 'context' | 'user' | 'cluster';
 
 const ITEM_TYPES: ItemType[] = ['context', 'user', 'cluster'];
 
-export { ITEM_TYPES }
+export { ITEM_TYPES };

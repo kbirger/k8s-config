@@ -1,4 +1,4 @@
-import '../file-utils'
+import '../file-utils';
 import { list } from './list';
 
 jest.mock('../file-utils');
@@ -9,7 +9,7 @@ describe('list command', () => {
     list('/tmp/foo', 'cluster');
 
     // Assert
-    expect(console.log).toHaveBeenCalledWith(['test-cluster'])
+    expect(console.log).toHaveBeenCalledWith(['test-cluster']);
   });
 
   it('should list contexts', () => {
@@ -17,7 +17,7 @@ describe('list command', () => {
     list('/tmp/foo', 'context');
 
     // Assert
-    expect(console.log).toHaveBeenCalledWith(['test-ctx'])
+    expect(console.log).toHaveBeenCalledWith(['test-ctx']);
   });
 
   it('should list users', () => {
@@ -25,7 +25,7 @@ describe('list command', () => {
     list('/tmp/foo', 'user');
 
     // Assert
-    expect(console.log).toHaveBeenCalledWith(['test-user'])
+    expect(console.log).toHaveBeenCalledWith(['test-user']);
   });
 
 });

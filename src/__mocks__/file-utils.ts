@@ -5,7 +5,7 @@ import * as yaml from 'js-yaml';
   type FileUtilsModule = typeof import('../file-utils');
   type MockedFileUtilsModule = { [P in keyof FileUtilsModule]: jest.Mock };
 
-  type X = Partial<FileUtilsModule>
+  type X = Partial<FileUtilsModule>;
   const fu = jest.genMockFromModule('../file-utils') as MockedFileUtilsModule;
 
   function getTestFile() {
