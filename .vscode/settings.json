@@ -1,3 +1,7 @@
 {
-  "debug.node.autoAttach": "off"
+  "debug.node.autoAttach": "off",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+},
 }

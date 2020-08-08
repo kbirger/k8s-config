@@ -5,9 +5,13 @@ const mocked = jest.genMockFromModule('..') as MockedCommandModule;
 
 
 mocked.compose = jest.fn(function () {
-  console.log('composing');
   // eslint-disable-next-line prefer-rest-params
-  actual.compose.apply(null, arguments);
+  return actual.compose.apply(null, arguments);
 });
-mocked.header.mockImplementation(() => true);
+mocked.header.mockReturnValue(true);
+
+mocked.deleteItem.mockReturnValue(true);
+mocked.rename.mockReturnValue(true);
+mocked.list.mockReturnValue(true);
+mocked.merge.mockReturnValue(true);
 module.exports = mocked;

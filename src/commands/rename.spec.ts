@@ -226,7 +226,7 @@ describe('rename command', () => {
       await rename('a', 'cluster', 'test-cluster', 'test-cluster2');
 
       // Assert
-      expect(console.log).toHaveBeenCalledWith('Deleted undefined with name=\'test-cluster2\'');
+      expect(console.log).toHaveBeenCalledWith("Deleted cluster with name='test-cluster2'");
       expect(console.log).toHaveBeenCalledWith('Changed clusters[?].cluster: test-cluster => test-cluster2');
       expect(console.log).toHaveBeenCalledWith('Changed contexts[?].context: test-cluster => test-cluster2');
       expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(expectedConfig));
@@ -298,7 +298,7 @@ describe('rename command', () => {
       await rename('a', 'context', 'test-ctx', 'test-ctx2');
 
       // Assert
-      expect(console.log).toHaveBeenCalledWith('Deleted undefined with name=\'test-ctx2\'');
+      expect(console.log).toHaveBeenCalledWith("Deleted context with name='test-ctx2'");
       expect(console.log).toHaveBeenCalledWith('Changed contexts[?].context: test-ctx => test-ctx2');
       expect(console.log).toHaveBeenCalledWith('Changed current-context: test-ctx => test-ctx2');
 
@@ -350,8 +350,7 @@ describe('rename command', () => {
       expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(expectedConfig));
     });
 
-    //  : bug. original dupe not deleted
-    xit('should rename a user when target exists', async () => {
+    it('should rename a user when target exists', async () => {
       // Arrange
       const expectedConfig = fileUtils.loadConfig('a');
       const originalConfig = fileUtils.loadConfig('a');
@@ -365,14 +364,16 @@ describe('rename command', () => {
       expectedConfig.users[0].name = 'test-user2';
       expectedConfig.users[0].user['client-certificate-data'] = 'test-cert-data';
       expectedConfig.users[0].user['client-key-data'] = 'test-key-data';
+      expectedConfig.contexts[0].context.user = 'test-user2';
       jest.spyOn(fileUtils, 'loadConfig').mockImplementationOnce(() => originalConfig);
       mockInquirerResponse = { confirm: 'overwrite' };
       // Act
       await rename('a', 'user', 'test-user', 'test-user2');
 
       // Assert
-      expect(console.log).toHaveBeenCalledWith('user renamed: test-user => test-user2');
-      expect(console.log).toHaveBeenCalledWith('user(test-user).user changed: test-user => test-user');
+      expect(console.log).toHaveBeenCalledWith("Deleted user with name='test-user2'");
+      expect(console.log).toHaveBeenCalledWith('Changed users[?].user: test-user => test-user2');
+      expect(console.log).toHaveBeenCalledWith('Changed contexts[?].context: test-user => test-user2');
       expect(fileUtils.saveConfig).toHaveBeenCalledWith('a', expect.objectContaining(expectedConfig));
     });
 

@@ -58,7 +58,7 @@ export class ConfigChangeProcessor implements ChangeProcessor<Config> {
         // todo: clean. should find a way to make this the same for all item types
         const name = isAddNamedItem(item) ? item.name : item.newValue as string;
         return ProcessorResult.continue([
-          { action: Actions.Delete, change: item.change, name: name } as DeleteNamedItem,
+          { action: Actions.Delete, change: item.change, name: name, itemType: item.itemType } as DeleteNamedItem,
           item
         ], message);
       }
@@ -91,10 +91,7 @@ export class ConfigChangeProcessor implements ChangeProcessor<Config> {
 
   processDeleteNamedItem(config: Config, item: DeleteNamedItem): Promise<ProcessorResult> {
     const items = jp.value(config, getJsonpath(item)) as NamedItem[];
-    // const p = getJsonpath(item, item.name);
-    // const deleteItem = jp.parent(config, p) as NamedItem;
     const idx = items.findIndex(i => get(i, item.change.field!) === item.name);
-    // const idx = items.findIndex(i => i === deleteItem)
 
     if (idx === -1) {
       return Promise.resolve(ProcessorResult.error(`Configuration does not contain a ${item.itemType} with ${item.change.field} '${item.name}'`));
@@ -123,8 +120,9 @@ export class ConfigChangeProcessor implements ChangeProcessor<Config> {
   }
 
   private async confirm(item: ChangeValueItem | ChangeNamedItem) {
-    const message = isNamed(item) ? `${item.itemType} with name '${item.name}' already exists` :
-      `${item.change.field} at ${getJsonpath(item, item.newValue)} already exists`;
+    const message = isNamed(item) ?
+      `${item.itemType} with name '${item.name}' already exists` :
+      `${item.itemType} with ${item.change.field} '${item.newValue}' already exists`;
     const confirmation = await inquirer.prompt([
       {
         type: 'expand',

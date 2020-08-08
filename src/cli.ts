@@ -4,13 +4,26 @@ import * as yargs from 'yargs';
 import { ITEM_TYPES, ItemType } from './interfaces';
 import { list, rename, compose, header, merge, deleteItem } from './commands';
 import { interactiveCommand } from './interactive-commands';
+import { validateFileExists } from './interactive-commands/utils';
 
 type CommandOption = 'delete' | 'list' | 'merge' | 'rename';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function startCli(args: string[] = process.argv) {
-  return yargs.option('dry-run', { alias: 'd', describe: 'do not write anything', type: 'boolean', default: false })
+export function startCli(args: string[]) {
+  return yargs
+    .option('dry-run', { alias: 'd', describe: 'do not write anything', type: 'boolean', default: false, required: true })
+    .scriptName('k8s-config')
+    .wrap(null)
     .command(
-      ['$0', 'interactive <command>', 'i <command>'],
+      ['$0'],
+      'launches in interactive mode with prompts',
+      (args) => args,
+      (args) => compose(
+        () => header(args['dry-run']),
+        () => interactiveCommand(args['dry-run'], undefined))
+    )
+
+    .command(
+      ['interactive [command]', 'i [command]'],
       'launches in interactive mode with prompts',
       (args) => args.positional('command', { describe: 'name of the command', choices: ['delete', 'list', 'merge', 'rename'] }),
       (args) => compose(
@@ -33,7 +46,7 @@ export function startCli(args: string[] = process.argv) {
         .positional('from', { describe: 'source configuration', type: 'string', required: true })
         .positional('type', { describe: 'item type to list', type: 'string', required: true, choices: ITEM_TYPES }),
       (args) => compose(
-        () => header(args['dry-run'] ?? false),
+        () => header(args['dry-run']),
         () => list(args.from as string, args.type as ItemType)))
     .command(
       ['rename <from> <type> <old> <new>'],
@@ -58,9 +71,25 @@ export function startCli(args: string[] = process.argv) {
         () => header(args['dry-run']),
         () => deleteItem(args.from as string, args.type as ItemType, args.name as string, args['dry-run']))
     )
+    .strict()
+    .check((args, aliases) => {
+      console.log('!', args, '!', aliases);
+      const from = args['from'] as string;
+      const to = args['to'] as string;
+
+      if (from !== undefined) {
+        return validateFileExists(from);
+      }
+
+      if (to !== undefined) {
+        return validateFileExists(to);
+      }
+
+    })
     .parse(args);
 }
 
 if (require.main === module) {
-  startCli(process.argv);
+  /* istanbul ignore next */
+  startCli(process.argv.slice(2));
 }
