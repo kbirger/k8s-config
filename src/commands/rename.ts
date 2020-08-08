@@ -72,36 +72,6 @@ async function renameCluster(config: Config, oldName: string, newName: string): 
     },
     ...contexts
   ];
-  // const oldItem = config.clusters.find(c => c.name === oldName);
-  // if (!oldItem) {
-  //   return Result.fail(`No cluster found with name '${oldName}'`);
-  // }
-
-  // const changes: ChangeItem[] = [];
-  // const pleaseDo = please(changes);
-
-  // const renamed = await pleaseDo({
-  //   doIf: () => !config.clusters.find(c => c.name === newName),
-  //   changeItem: { type: 'cluster', field: 'name', from: oldName, to: newName },
-  //   action: () => {
-  //     const idx = config.clusters.findIndex(c => c.name === newName);
-  //     if (idx > -1) {
-  //       config.clusters.splice(idx, 1);
-  //     }
-
-  //     oldItem.name = newName;
-  //   }
-  // });
-
-  // if (renamed) {
-  //   for (const context of config.contexts) {
-  //     if (context.context.cluster === oldName) {
-  //       context.context.cluster = newName;
-  //       changes.push({ type: 'context', field: 'cluster', name: context.name, from: oldName, to: newName });
-  //     }
-  //   }
-  // }
-  // return Result.success(changes);
 }
 
 async function renameContext(config: Config, oldName: string, newName: string): Promise<ChangeItem[]> {

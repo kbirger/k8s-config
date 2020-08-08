@@ -12,7 +12,7 @@ export type ChangeItem = AddItem | AddNamedItem | ChangeValueItem | DeleteItem |
 export type ChangeItemField = keyof Config | ItemType;
 
 export type BaseChangeItem = { action: Actions, itemType: ChangeItemField, change: ChangeValueOptions };
-export type ChangeNamedItem = BaseChangeItem & { name: string, field: ItemType };
+export type ChangeNamedItem = BaseChangeItem & { name: string };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type AddItem = BaseChangeItem & { action: Actions.Add, newValue: string | object };

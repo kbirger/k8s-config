@@ -23,12 +23,12 @@ interface Result {
   messages: string[];
 }
 export class ProcessorResult {
-  constructor(public readonly state: ProcessorResultState, public readonly error: string | null, public readonly extraItems: ChangeItem[] | null) {
+  constructor(public readonly state: ProcessorResultState, public readonly error: string | null, public readonly extraItems: ChangeItem[] = []) {
 
   }
 
   static success(): ProcessorResult {
-    return new ProcessorResult(ProcessorResultState.Success, null, null);
+    return new ProcessorResult(ProcessorResultState.Success, null);
   }
 
   static continue(items: ChangeItem[], message: string): ProcessorResult {
@@ -36,11 +36,11 @@ export class ProcessorResult {
   }
 
   static error(errorMessage: string): ProcessorResult {
-    return new ProcessorResult(ProcessorResultState.Error, errorMessage, null);
+    return new ProcessorResult(ProcessorResultState.Error, errorMessage);
   }
 
   static skip(message: string): ProcessorResult {
-    return new ProcessorResult(ProcessorResultState.Skip, message, null);
+    return new ProcessorResult(ProcessorResultState.Skip, message);
   }
 }
 
@@ -53,15 +53,11 @@ function processAddItem<TState>(config: TState, item: AddItem, processor: Change
 }
 
 function processChangeValueItem<TState>(config: TState, item: ChangeValueItem, processor: ChangeProcessor<TState>): Promise<ProcessorResult> {
-  // /*if (isChangeValueNamedItem(item)) {
   return processor.processChangeValueNamedItem(config, item);
-  // }*/
-
-  // return processor.processChangeValueUnnamedItem(config, item);
 }
 
-function pushToHead(list: ChangeItem[], changeItems: ChangeItem[] | null) {
-  for (const newItem of changeItems?.reverse() ?? []) {
+function pushToHead(list: ChangeItem[], changeItems: ChangeItem[]) {
+  for (const newItem of changeItems.reverse()) {
     list.unshift(newItem);
   }
 }
