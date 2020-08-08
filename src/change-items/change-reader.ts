@@ -18,7 +18,7 @@ class ChangeReader implements ChangeProcessor<string[]> {
     return Promise.resolve(ProcessorResult.success());
   }
   processAddItemUnnamed(state: string[], item: AddItem): Promise<ProcessorResult> {
-    state.push(`Added ${item.change.field} with value:${nindent(4, JSON.stringify(item.newValue, null, 2))}`);
+    state.push(`Added ${item.change.path} with value:${nindent(4, JSON.stringify(item.newValue, null, 2))}`);
 
     return Promise.resolve(ProcessorResult.success());
   }
@@ -33,7 +33,7 @@ class ChangeReader implements ChangeProcessor<string[]> {
   }
 
   processDeleteUnnamedItem(state: string[], item: DeleteItem): Promise<ProcessorResult> {
-    state.push(`Deleted ${item.itemType}`);
+    state.push(`Deleted ${item.change.path}`);
     return Promise.resolve(ProcessorResult.success());
   }
 

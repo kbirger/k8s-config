@@ -11,4 +11,7 @@ mocked.compose = jest.fn(function () {
 mocked.header.mockReturnValue(true);
 
 mocked.deleteItem.mockReturnValue(true);
+mocked.rename.mockReturnValue(true);
+mocked.list.mockReturnValue(true);
+mocked.merge.mockReturnValue(true);
 module.exports = mocked;
