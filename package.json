@@ -1,6 +1,6 @@
 {
   "name": "k8s-config-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A CLI for performing operations on k8s config files",
   "main": "./dist/cli.js",
   "bin": {
