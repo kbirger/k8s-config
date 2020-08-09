@@ -12,3 +12,12 @@ export function validateFileExists(filepath: string): true | string {
 
   return true;
 }
+
+export function assertFileExists(filepath: string): void {
+  const validation = validateFileExists(filepath);
+
+  if (validation !== true) {
+    console.error(validation);
+    process.exit(1);
+  }
+}

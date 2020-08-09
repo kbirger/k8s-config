@@ -9,6 +9,6 @@
   original.readFileSync.mockImplementation(() => fs.readFileSync('./test/test.yaml', 'utf8'));
   original.writeFileSync.mockImplementation(() => { /* */ });
   original.copyFileSync.mockImplementation(() => { /* */ });
-
+  original.statSync.mockReturnValue({ isFile() { return true; } });
   module.exports = original;
 })();

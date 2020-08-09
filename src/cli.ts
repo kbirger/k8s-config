@@ -4,7 +4,6 @@ import * as yargs from 'yargs';
 import { ITEM_TYPES, ItemType } from './interfaces';
 import { list, rename, compose, header, merge, deleteItem } from './commands';
 import { interactiveCommand } from './interactive-commands';
-import { validateFileExists } from './interactive-commands/utils';
 
 type CommandOption = 'delete' | 'list' | 'merge' | 'rename';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -72,20 +71,6 @@ export function startCli(args: string[]) {
         () => deleteItem(args.from as string, args.type as ItemType, args.name as string, args['dry-run']))
     )
     .strict()
-    .check((args, aliases) => {
-      console.log('!', args, '!', aliases);
-      const from = args['from'] as string;
-      const to = args['to'] as string;
-
-      if (from !== undefined) {
-        return validateFileExists(from);
-      }
-
-      if (to !== undefined) {
-        return validateFileExists(to);
-      }
-
-    })
     .parse(args);
 }
 
